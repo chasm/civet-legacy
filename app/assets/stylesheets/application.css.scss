@@ -133,8 +133,12 @@ h2, legend {
 }
 
 #pw-quality {
-  font-size: 1.2em;
+  font-size: 1.1em;
   margin-top: 20px;
+}
+
+.reset-form #pw-quality {
+  margin-top: 0;
 }
 
 .crack-div {

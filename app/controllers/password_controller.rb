@@ -5,7 +5,7 @@ class PasswordController < ApplicationController
   end
   
   def update
-    PasswordReset.new(request).reset_password(@user, params)
+    PasswordReset.new.reset_password(@user, params)
     
     if @user.valid?
       session[:user_id] = @user.id

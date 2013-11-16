@@ -1,8 +1,8 @@
 Civet::Application.routes.draw do
 
   # User registration (coded links)
-  get   'register/:code' => 'users#new',   as: :register       # Registration form
-  patch 'register/:code' => 'users#create'                     # Create new user/destroy registrant
+  get  'register/:code' => 'users#new',   as: :register        # Registration form
+  post 'register/:code' => 'users#create'                      # Create new user/destroy registrant
   
   get    'login'  => 'session#new',     as: :login             # Login form
   post   'login'  => 'session#create'                          # Log user in (start session)

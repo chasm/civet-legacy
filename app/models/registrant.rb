@@ -1,7 +1,7 @@
 class Registrant < ActiveRecord::Base
   TIME_TO_EXPIRE = 1.day
   
-  before_save :set_code
+  before_create :set_code
   before_save :set_expiration
   
   validates :email, presence: true
@@ -10,7 +10,6 @@ class Registrant < ActiveRecord::Base
   def self.find_by_code(code)
     clean_up
     if registrant = Registrant.where(code: code).first
-      registrant.set_expiration
       registrant.save!
       return registrant
     end

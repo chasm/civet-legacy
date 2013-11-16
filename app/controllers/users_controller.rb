@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
   
   def create
-    @user = UserRegistration.new(request).register_new_user(@registrant, params)
+    @user = UserRegistration.new.register_new_user(@registrant, params)
     
     if @user.valid?
       session[:user_id] = @user.id

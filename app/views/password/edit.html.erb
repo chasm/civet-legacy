@@ -21,7 +21,7 @@
           <div class="col-lg-6">
             <p id="pw-quality">Password too weak!</p>
             <div id="pw-meter" class="strength-meter progress progress-striped">
-              <div id="strength-meter meter progress-bar w-0" role="progressbar" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0"></div>
+              <div id="strength-meter" class="meter progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0"></div>
             </div>
             <div class="crack-div">
               <strong>Time to crack:</strong> &nbsp;
@@ -35,4 +35,6 @@
   </div>
 </div>
 
+<script src="/js/zxcvbn-async.js"></script>
 <%= javascript_include_tag "password" %>
+<%= javascript_include_tag "strength" %>

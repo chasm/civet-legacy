@@ -26,7 +26,7 @@
           <p id="registrant-email"><%= @registrant.email %></p>
           <p id="pw-quality">Password too weak!</p>
           <div id="pw-meter" class="strength-meter progress progress-striped">
-            <div id="strength-meter meter progress-bar w-0" role="progressbar" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0"></div>
+            <div id="strength-meter" class="meter progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0"></div>
           </div>
           <div class="crack-div">
             <strong>Time to crack:</strong> &nbsp;
@@ -39,59 +39,6 @@
   </div>
 </div>
 
-<%= javascript_include_tag "password" %>
-
 <script src="/js/zxcvbn-async.js"></script>
-
-<script>
-  $(function() {
-    var checkMatch = function(event) {
-      var pw = $('#user_password').val();
-      var pc = $('#user_password_confirmation').val();
-      if (pw === pc) {
-        $('#match-div').html("Passwords match!").addClass('pmatch');
-      } else {
-        $('#match-div').html("Passwords don't match!").removeClass('pmatch');
-      }
-    };
-    
-    var setStrengthMeter = function(pw) {
-      var result = zxcvbn(pw);
-      var score = result.score;
-      var strength = (score / 4) * 100;
-      var color;
-      switch (score) {
-        case 1:
-          color = 'danger';
-          break;
-        case 2:
-          color = 'warning';
-          break;
-        case 3:
-          color = 'success';
-          break;
-        default:
-          color = 'info';
-      }
-      
-      $('#time-to-crack').html(result.crack_time_display);
-      $('#strength-meter')
-        .removeClass('progress-bar-danger')
-        .removeClass('progress-bar-warning')
-        .removeClass('progress-bar-success')
-        .removeClass('progress-bar-info')
-        .addClass('progress-bar-' + color)
-        .css('width', strength + '%');
-    };
-    
-    $('#user_password_confirmation').on('keyup', checkMatch);
-  
-    $('#user_password').on('keyup', function(event) {
-      var pw = $(this).val();
-      try {
-        setStrengthMeter(pw);
-      } catch (e) {}
-      checkMatch();
-    });
-  });
-</script>
+<%= javascript_include_tag "password" %>
+<%= javascript_include_tag "strength" %>

@@ -18,8 +18,6 @@ $ ->
       when 2 then 'warning'
       when 3 then 'success'
       else 'info'
-        
-    console.log color
     
     $('#time-to-crack').html result.crack_time_display
     

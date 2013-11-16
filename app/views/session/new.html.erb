@@ -18,11 +18,11 @@
             <legend>Please sign in</legend>
             <div class="form-group">
               <%= f.label :email %>
-              <%= f.text_field :email, class: "form-control", placeholder: "Email address" %>
+              <%= f.email_field :email, class: "form-control", placeholder: "Enter your email address", autofocus: true, required: true %>
             </div>
             <div class="form-group">
               <%= f.label :password, id: 'password-label' %>
-              <%= f.password_field :password, class: "form-control showable-password", placeholder: "Password" %>
+              <%= f.password_field :password, class: "form-control showable-password", placeholder: "Enter your password", required: true %>
             </div>
             <div class="form-group">
               <%= f.submit "Sign in", class: "btn btn-success", id: 'submit-button' %>

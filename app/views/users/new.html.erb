@@ -1,0 +1,96 @@
+<div id="registration-form row">
+  <div class="col-lg-8 col-lg-offset-2">
+    <%= form_for @user, url: register_url, html: { role: "form" } do |f| %>
+      <legend>Please complete your registration</legend>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: "form-control", placeholder: "Name" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :password %>
+            <%= f.password_field :password, class: "form-control showable-password", placeholder: "Password" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :password_confirmation %>
+            <%= f.password_field :password_confirmation, class: "form-control showable-password", placeholder: "Type it again" %>
+          </div>
+          <div class="form-group">
+            <input id="hidden-strength" type="hidden" name="strength" value="0">
+            <%= f.submit "Register", class: "btn btn-success" %>
+            <button id="show-password-button" class="btn btn-warning" data-state="show">Show Passwords</button>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <p id="registrant-email = @registrant.email
+          <p id="pw-quality Password too weak!
+          <div id="pw-meter" class="strength-meter progress progress-striped">
+            <div id="strength-meter meter progress-bar w-0" role="progressbar" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0"></div>
+          <div class="crack-div">
+            <strong>Time to crack:</strong> &nbsp;
+            <span id="time-to-crack">instant</span>
+          </div>
+          <div id="match-div"></div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= render partial: 'layouts/password' %>
+
+<script src="/js/zxcvbn-async.js"></script>
+
+<script>
+  $(function() {
+    var checkMatch = function(event) {
+      var pw = $('#user_password').val();
+      var pc = $('#user_password_confirmation').val();
+      if (pw === pc) {
+        $('#match-div').html("Passwords match!").addClass('pmatch');
+      } else {
+        $('#match-div').html("Passwords don't match!").removeClass('pmatch');
+      }
+    };
+    
+    var setStrengthMeter = function(pw) {
+      var result = zxcvbn(pw);
+      var score = result.score;
+      var strength = (score / 4) * 100;
+      var color;
+      switch (score) {
+        case 1:
+          color = 'danger';
+          break;
+        case 2:
+          color = 'warning';
+          break;
+        case 3:
+          color = 'success';
+          break;
+        default:
+          color = 'info';
+      }
+      
+      $('#time-to-crack').html(result.crack_time_display);
+      $('#strength-meter')
+        .removeClass('progress-bar-danger')
+        .removeClass('progress-bar-warning')
+        .removeClass('progress-bar-success')
+        .removeClass('progress-bar-info')
+        .addClass('progress-bar-' + color)
+        .css('width', strength + '%');
+    };
+    
+    $('#user_password_confirmation').on('keyup', checkMatch);
+  
+    $('#user_password').on('keyup', function(event) {
+      var pw = $(this).val();
+      try {
+        setStrengthMeter(pw);
+      } catch (e) {}
+      checkMatch();
+    });
+  });
+</script>

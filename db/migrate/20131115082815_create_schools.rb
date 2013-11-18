@@ -16,5 +16,7 @@ class CreateSchools < ActiveRecord::Migration
       t.integer :school_id, index: true
       t.integer :vitae_id, index: true
     end
+    
+    add_index :schools_vitaes, [ :school_id, :vitae_id ], uniqueness: true
   end
 end

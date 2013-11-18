@@ -15,5 +15,7 @@ class CreateRefs < ActiveRecord::Migration
       t.integer :ref_id, index: true
       t.integer :vitae_id, index: true
     end
+    
+    add_index :refs_vitaes, [ :ref_id, :vitae_id ], uniqueness: true
   end
 end

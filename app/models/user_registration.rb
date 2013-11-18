@@ -2,8 +2,11 @@ class UserRegistration
   REGISTRATION_MESSAGE = %{
     An email with instructions for completing your registration
     has been sent to you. }.squish
+    
+  ERROR_MESSAGE = "Unable to begin registration. Check your email address and try again."
   
-  def initialize
+  def initialize(messages = {})
+    @messages = messages
   end
   
   def send_email_verification(email)
@@ -11,10 +14,11 @@ class UserRegistration
     
     if registrant.save
       Notifier.registration_request(registrant).deliver
-      return REGISTRATION_MESSAGE
+      
+      @messages[:notice] = REGISTRATION_MESSAGE
+    else
+      @messages[:error] = ERROR_MESSAGE
     end
-    
-    nil
   end
   
   def register_new_user(registrant, params)

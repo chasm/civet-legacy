@@ -1,6 +1,6 @@
 collection @vitaes
 
-attributes :id, :name, :objective
+attributes :id, :name, :objective, :code
 
 child :user do
   attributes :name

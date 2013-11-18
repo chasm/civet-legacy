@@ -11,31 +11,19 @@ class SessionController < ApplicationController
     
     if password.blank?
       if user = User.where(email: email).take
-        if message = PasswordReset.new.send_password_reset( user )
-          flash.now[:notice] = message
-        else
-          flash.now[:notice] = "Unable to reset your password. Check your passwords and try again."
-        end
+        PasswordReset.new(user, flash.now).send_password_reset
       else
-        if message = UserRegistration.new.send_email_verification( email )
-          flash.now[:notice] = message
-        else
-          flash.now[:error] = "Unable to begin registration. Check your email address and try again."
-        end
+        UserRegistration.new(flash.now).send_email_verification( email )
       end
-      
-      render :new
     else
       if user = User.authenticate(email, password)
-        session[:user_id] = user.id
-        
-        redirect_to root_url
+        log_user_in(user)
       else
         flash.now[:error] = "Unable to sign you in. Please try again."
-        
-        render :new
       end
     end
+      
+    render :new
   end
   
   def destroy

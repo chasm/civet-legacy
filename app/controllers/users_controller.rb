@@ -9,8 +9,7 @@ class UsersController < ApplicationController
     @user = UserRegistration.new.register_new_user(@registrant, params)
     
     if @user.valid?
-      session[:user_id] = @user.id
-      redirect_to root_url, notice: "Thank you for registering!"
+      log_user_in(user, "Thank you for registering!")
     else
       flash.now[:error] = @user.errors
       render :new

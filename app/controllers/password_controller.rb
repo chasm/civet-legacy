@@ -5,11 +5,10 @@ class PasswordController < ApplicationController
   end
   
   def update
-    PasswordReset.new.reset_password(@user, params)
+    PasswordReset.new(@user).reset_password(params)
     
     if @user.valid?
-      session[:user_id] = @user.id
-      redirect_to root_url, notice: "Your password has been updated."
+      log_user_in(user, "Your password has been updated.")
     else
       flash.now[:error] = @user.errors
       render :edit

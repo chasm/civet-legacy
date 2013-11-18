@@ -88,19 +88,25 @@ body {
   padding: 70px 15px 0;
 }
 
-h1, caption {
+h1 {
   font-size: 160%;
   text-align: left;
   line-height: 200%;
   border-bottom: 1px solid $border-default;
 }
 
-h2, legend {
+h2, caption, legend, section header h1 {
   text-align: left;
   font-size: 130%;
   line-height: 1.5;
   color: $bgnd-success;
   border-bottom: 1px solid $bgnd-success;
+}
+
+section section header h1 {
+  font-size: 100%;
+  color: $text-muted;
+  border-bottom: none;
 }
 
 .navbar-nav > li > a {

@@ -6,5 +6,5 @@
 //= require ./vendor/numeral
 //= require ./vendor/jquery.noty
 //= require ./vendor/themes/default
-//= require ./vendor/layouts/top
-//= require ./vendor/layouts/topRight
+//= require ./vendor/layouts/bottom
+//= require ./vendor/layouts/bottomRight

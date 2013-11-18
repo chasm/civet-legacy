@@ -19,19 +19,16 @@ vitaes = Vitae.create([
   {
     name: "For good jobs",
     objective: "Get a good job",
-    code: SecureRandom.urlsafe_base64,
     user: user
   },
   {
     name: "For better jobs",
     objective: "Get a better job",
-    code: SecureRandom.urlsafe_base64,
     user: user
   },
   {
     name: "For the best job",
     objective: "Get the best job",
-    code: SecureRandom.urlsafe_base64,
     user: user
   }
 ])

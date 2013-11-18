@@ -27,40 +27,42 @@ class User < ActiveRecord::Base
     if user = User.where('code = ?', code).take
       if user.expires_at >= Time.now.gmtime
         user.set_expiration
-        user.save!
         return user
       end
-      user.code = nil
-      user.expires_at = nil
-      user.save!
+      unset_password_reset
     end
     
     nil
-  end
-  
-  def set_password_reset
-    self.code = SecureRandom.urlsafe_base64
-    set_expiration
-    self.save!
-  end
-  
-  def set_expiration
-    self.expires_at = TIME_TO_EXPIRE.from_now
   end
   
   def password_matches?(password)
     return self if self.fish == BCrypt::Engine.hash_secret(password, self.salt)
   end
   
+  def set_password_reset
+    self.code = SecureRandom.urlsafe_base64
+    set_expiration
+  end
+  
+  def set_expiration
+    self.expires_at = TIME_TO_EXPIRE.from_now
+    self.save!
+  end
+  
   def reset_password(password_params)
     if self.update(password_params)
-      self.code = nil
-      self.expires_at = nil
-      self.save!
+      unset_password_reset
     end
   end
   
   protected
+  
+  def unset_password_reset
+    self.code = nil
+    self.expires_at = nil
+    self.save!
+    nil
+  end
   
   def encrypt_password
     if password.present?

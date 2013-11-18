@@ -14,6 +14,11 @@ class ApplicationController < ActionController::Base
   
   protected
   
+  def log_user_in(user, message = nil)
+    session[:user_id] = user.id
+    redirect_to root_url, notice: message
+  end
+  
   def set_csrf_token_header
     response.headers['X-CSRF-Token'] = form_authenticity_token
   end

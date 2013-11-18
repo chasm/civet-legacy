@@ -1,6 +1,6 @@
 class VitaeController < ApplicationController
   
   def show
-    @vitaes = Vitae.includes(:user, :jobs, :schools, :refs).where(code: params[:code]).to_a
+    @vitae = Vitae.includes(:user, :jobs, :schools, :refs).where(code: params[:code]).take
   end
 end

@@ -14,6 +14,7 @@ node :linked do |vitae|
   {
     jobs: vitae_jobs_url(vitae.user, vitae),
     schools: vitae_schools_url(vitae.user, vitae),
-    refs: vitae_refs_url(vitae.user, vitae)
+    refs: vitae_refs_url(vitae.user, vitae),
+    vitaes: vitaes_url()
   }
 end

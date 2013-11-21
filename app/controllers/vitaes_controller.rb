@@ -6,10 +6,8 @@ class VitaesController < ApplicationController
   
   def index
     @vitaes = current_user.vitaes
-  end
-  
-  def show
-    @vitaes = [ @vitae ]
+    
+    @vitaes = @vitaes.where('id in (?)', params[:ids].split(",")) if @filtered = params[:ids].presence
   end
   
   def create

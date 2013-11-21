@@ -8,9 +8,6 @@ class SchoolsController < ApplicationController
   def index
   end
   
-  def show
-  end
-  
   def create
     @school = @schools.create(school_params)
     
@@ -41,6 +38,8 @@ class SchoolsController < ApplicationController
     end
     
     @schools = @vitae ? @vitae.schools : current_user.schools
+    
+    @schools = @schools.where('id in (?)', params[:ids].split(",")) if @filtered = params[:ids].presence
     
     if (params[:id])
       head :not_found unless @school = @schools.find_by_id( params[:id] )

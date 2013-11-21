@@ -8,9 +8,6 @@ class JobsController < ApplicationController
   def index
   end
   
-  def show
-  end
-  
   def create
     @job = @user.jobs.create(job_params)
     
@@ -41,6 +38,8 @@ class JobsController < ApplicationController
     end
     
     @jobs = @vitae ? @vitae.jobs : current_user.jobs
+    
+    @jobs = @jobs.where('id in (?)', params[:ids].split(",")) if @filtered = params[:ids].presence
     
     if (params[:id])
       head :not_found unless @job = @jobs.find_by_id( params[:id] )

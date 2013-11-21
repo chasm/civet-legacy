@@ -1,11 +1,12 @@
 <section id="page-content">Hey</section>
 
 <script id="vitaes-template" type="text/x-handlebars-template">
-  <ul class="vitaes-link">
+  <dl class="vitaes-link">
     {{#each this}}
-      <li><a href="{{href}}">{{name}}</a></li>
+      <dt><a href="{{href}}">{{name}}</a></dt>
+      <dd>{{objective}}</dd>
     {{/each}}
-  </ul>
+  </dt>
 </script>
 
 <script id="vitae-template" type="text/x-handlebars-template">

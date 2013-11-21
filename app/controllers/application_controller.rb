@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :make_action_mailer_use_request_host_and_protocol
   
   def current_user
-    @current_user ||= User.where(id: session[:user_id]).take 
+    @current_user ||= User.first # User.where(id: session[:user_id]).take 
   end
   
   def is_authenticated?

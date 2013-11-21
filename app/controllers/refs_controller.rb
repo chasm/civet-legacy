@@ -8,9 +8,6 @@ class RefsController < ApplicationController
   def index
   end
   
-  def show
-  end
-  
   def create
     @ref = current_user.refs.create(ref_params)
     
@@ -41,6 +38,8 @@ class RefsController < ApplicationController
     end
     
     @refs = @vitae ? @vitae.refs : current_user.refs
+    
+    @refs = @refs.where('id in (?)', params[:ids].split(",")) if @filtered = params[:ids].presence
     
     if (params[:id])
       head :not_found unless @ref = @refs.find_by_id( params[:id] )

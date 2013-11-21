@@ -10,14 +10,34 @@ Civet::Application.routes.draw do
   
   scope :api do
     
-    resources :jobs, defaults: { format: :json }
-    resources :schools, defaults: { format: :json }
-    resources :refs, defaults: { format: :json }
+    resources :jobs, except: [ :show, :new, :edit ], defaults: { format: :json } do
+      get ':ids' => 'jobs#index', on: :collection, constraint: /\d+,(\d+(,?)+)/, as: :filtered
+    end
+    
+    resources :schools, except: [ :show, :new, :edit ], defaults: { format: :json } do
+      get ':ids' => 'schools#index', on: :collection, constraint: /\d+,(\d+(,?)+)/, as: :filtered
+    end
+    
+    resources :refs, except: [ :show, :new, :edit ], defaults: { format: :json } do
+      get ':ids' => 'refs#index', on: :collection, constraint: /\d+,(\d+(,?)+)/, as: :filtered
+    end
   
-    resources :vitaes, defaults: { format: :json } do
-      resources :jobs, only: [ :index ], defaults: { format: :json }
-      resources :schools, only: [ :index ], defaults: { format: :json }
-      resources :refs, only: [ :index ], defaults: { format: :json }
+    resources :vitaes, except: [ :show, :new, :edit ], defaults: { format: :json } do
+      
+      resources :jobs, only: [ :index ], defaults: { format: :json } do
+        get ':ids' => 'jobs#index', on: :collection, constraint: /\d+,(\d+(,?)+)/, as: :filtered
+      end
+      
+      resources :schools, only: [ :index ], defaults: { format: :json } do
+        get ':ids' => 'schools#index', on: :collection, constraint: /\d+,(\d+(,?)+)/, as: :filtered
+      end
+      
+      resources :refs, only: [ :index ], defaults: { format: :json } do
+        get ':ids' => 'refs#index', on: :collection, constraint: /\d+,(\d+(,?)+)/, as: :filtered
+      end
+      
+      get ':ids' => 'vitaes#index', on: :collection, constraint: /\d+,(\d+(,?)+)/, as: :filtered
+      
     end
   
     get   'profile' => 'user#show',  as: :profile              # User information

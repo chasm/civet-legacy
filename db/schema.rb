@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20131115133347) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "jobs", force: true do |t|
     t.string   "company"
     t.string   "location"
@@ -25,12 +28,14 @@ ActiveRecord::Schema.define(version: 20131115133347) do
     t.datetime "updated_at"
   end
 
-  add_index "jobs", ["user_id"], name: "index_jobs_on_user_id"
+  add_index "jobs", ["user_id"], name: "index_jobs_on_user_id", using: :btree
 
   create_table "jobs_vitaes", id: false, force: true do |t|
     t.integer "job_id"
     t.integer "vitae_id"
   end
+
+  add_index "jobs_vitaes", ["job_id", "vitae_id"], name: "index_jobs_vitaes_on_job_id_and_vitae_id", unique: true, using: :btree
 
   create_table "refs", force: true do |t|
     t.string   "name"
@@ -43,12 +48,14 @@ ActiveRecord::Schema.define(version: 20131115133347) do
     t.datetime "updated_at"
   end
 
-  add_index "refs", ["user_id"], name: "index_refs_on_user_id"
+  add_index "refs", ["user_id"], name: "index_refs_on_user_id", using: :btree
 
   create_table "refs_vitaes", id: false, force: true do |t|
     t.integer "ref_id"
     t.integer "vitae_id"
   end
+
+  add_index "refs_vitaes", ["ref_id", "vitae_id"], name: "index_refs_vitaes_on_ref_id_and_vitae_id", unique: true, using: :btree
 
   create_table "registrants", force: true do |t|
     t.string   "email"
@@ -70,12 +77,14 @@ ActiveRecord::Schema.define(version: 20131115133347) do
     t.datetime "updated_at"
   end
 
-  add_index "schools", ["user_id"], name: "index_schools_on_user_id"
+  add_index "schools", ["user_id"], name: "index_schools_on_user_id", using: :btree
 
   create_table "schools_vitaes", id: false, force: true do |t|
     t.integer "school_id"
     t.integer "vitae_id"
   end
+
+  add_index "schools_vitaes", ["school_id", "vitae_id"], name: "index_schools_vitaes_on_school_id_and_vitae_id", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -97,6 +106,6 @@ ActiveRecord::Schema.define(version: 20131115133347) do
     t.datetime "updated_at"
   end
 
-  add_index "vitaes", ["user_id"], name: "index_vitaes_on_user_id"
+  add_index "vitaes", ["user_id"], name: "index_vitaes_on_user_id", using: :btree
 
 end

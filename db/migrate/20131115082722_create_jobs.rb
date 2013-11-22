@@ -17,6 +17,6 @@ class CreateJobs < ActiveRecord::Migration
       t.integer :vitae_id, index: true
     end
     
-    add_index :jobs_vitaes, [ :job_id, :vitae_id ], uniqueness: true
+    add_index :jobs_vitaes, [ :job_id, :vitae_id ], unique: true
   end
 end

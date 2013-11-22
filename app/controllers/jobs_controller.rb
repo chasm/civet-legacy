@@ -39,7 +39,7 @@ class JobsController < ApplicationController
     
     @jobs = @vitae ? @vitae.jobs : current_user.jobs
     
-    @jobs = @jobs.where('id in (?)', params[:ids].split(",")) if @filtered = params[:ids].presence
+    @jobs = @jobs.where('id in (?)', params[:id].split(",")) if @filtered = params[:id].presence
     
     if (params[:id])
       head :not_found unless @job = @jobs.find_by_id( params[:id] )

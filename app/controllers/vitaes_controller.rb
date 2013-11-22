@@ -1,13 +1,15 @@
 class VitaesController < ApplicationController
   before_action :get_vitae, except: [ :index, :create ]
-  before_action :set_csrf_token_header, only: [ :index, :show ]
+  before_action :set_csrf_token_header, only: [ :index ]
   
   respond_to :json
   
   def index
-    @vitaes = current_user.vitaes
-    
-    @vitaes = @vitaes.where('id in (?)', params[:ids].split(",")) if @filtered = params[:ids].presence
+    @vitaes = current_user.vitaes.includes(:jobs, :schools, :refs)
+    @vitaes = @vitaes.where('id in (?)', params[:id].split(",")) if @filtered = params[:id].presence
+    @jobs = @vitaes.map {|vitae| vitae.jobs }.flatten.uniq
+    @schools = @vitaes.map {|vitae| vitae.schools }.flatten.uniq
+    @refs = @vitaes.map {|vitae| vitae.refs }.flatten.uniq
   end
   
   def create

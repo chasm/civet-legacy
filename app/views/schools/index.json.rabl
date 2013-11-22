@@ -1,17 +1,19 @@
-collection @schools
+collection @schools, root: :schools
 
 attributes :id, :name, :location, :major, :enrolled_on, :left_on, :did_graduate
 
 node :href do |school|
-  school_url(school)
+  @vitae ? vitae_schools_url(@vitae, school) : school_url(school)
+end
+
+node :links do |school|
+  {
+    vitaes: vitae_url(school.vitaes.map {|v| v.id }.join(","))
+  }
 end
 
 node :linked do |school|
-  linked = {
-    vitaes: filtered_vitaes_url(school.vitaes.map {|v| v.id }.join(","))
+  {
+    schools: @vitae ? vitae_schools_url(@vitae) : schools_url
   }
-  
-  linked[:schools] = schools_url if @filtered
-  
-  linked
-end
+end if @filtered

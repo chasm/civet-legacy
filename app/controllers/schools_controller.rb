@@ -39,7 +39,7 @@ class SchoolsController < ApplicationController
     
     @schools = @vitae ? @vitae.schools : current_user.schools
     
-    @schools = @schools.where('id in (?)', params[:ids].split(",")) if @filtered = params[:ids].presence
+    @schools = @schools.where('id in (?)', params[:id].split(",")) if @filtered = params[:id].presence
     
     if (params[:id])
       head :not_found unless @school = @schools.find_by_id( params[:id] )

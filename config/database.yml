@@ -1,17 +1,23 @@
 development:
-  adapter: sqlite3
-  database: db/development.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  database: civet_dev
   pool: 5
-  timeout: 5000
+  username: rails
+  password: '!QAZxsw2#EDC'
 
 test:
-  adapter: sqlite3
-  database: db/test.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  database: civet_test
   pool: 5
-  timeout: 5000
+  username: rails
+  password: '!QAZxsw2#EDC'
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  database: civet_production
   pool: 5
-  timeout: 5000
+  username: rails
+  password: '!QAZxsw2#EDC'

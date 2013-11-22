@@ -39,7 +39,7 @@ class RefsController < ApplicationController
     
     @refs = @vitae ? @vitae.refs : current_user.refs
     
-    @refs = @refs.where('id in (?)', params[:ids].split(",")) if @filtered = params[:ids].presence
+    @refs = @refs.where('id in (?)', params[:id].split(",")) if @filtered = params[:id].presence
     
     if (params[:id])
       head :not_found unless @ref = @refs.find_by_id( params[:id] )

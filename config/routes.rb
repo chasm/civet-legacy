@@ -10,6 +10,8 @@ Civet::Application.routes.draw do
   
   scope :api do
     
+    get '' => 'api#index', as: :api, defaults: { format: :json }
+    
     resources :jobs, except: [ :show, :new, :edit ], defaults: { format: :json } do
       get ':id' => 'jobs#index', on: :collection
     end
@@ -40,6 +42,9 @@ Civet::Application.routes.draw do
   # Password reset (coded links)
   get   'reset/:code' => 'password#edit',  as: :reset          # Password reset form
   patch 'reset/:code' => 'password#update'                     # Reset users password
+  
+  get 'vitaes'    => 'site#index'
+  get 'vitae/:id' => 'site#index'
   
   # Dashboard
   root 'site#index'

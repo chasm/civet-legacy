@@ -8,3 +8,5 @@
 //= require themes/default
 //= require layouts/bottom
 //= require layouts/bottomRight
+//= require underscore
+//= require backbone

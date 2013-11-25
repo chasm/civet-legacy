@@ -1,20 +1,3 @@
-<section id="page-content">Hey</section>
+<section id="page-content"></section>
 
-<script id="vitaes-template" type="text/x-handlebars-template">
-  <dl class="vitaes-link">
-    {{#each this}}
-      <dt><a href="{{href}}">{{name}}</a></dt>
-      <dd>{{objective}}</dd>
-    {{/each}}
-  </dt>
-</script>
-
-<script id="vitae-template" type="text/x-handlebars-template">
-  {{#each this}}
-    <h2>{{name}}</h2>
-    <p>{{objective}}</p>
-    <p class="vitaes-path"><a href="#">All vitaes</a></p>
-  {{/each}}
-</script>
-
-<%= javascript_include_tag "onepage" %>
+<%= javascript_include_tag "index" %>

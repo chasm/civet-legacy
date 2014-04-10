@@ -6,20 +6,23 @@
 
   showVitaes: ->
     @showPage "/api/vitaes",
-      Handlebars.templates.vitaes
+      HandlebarsTemplates['vitaes']
 
   showVitae: (id) ->
     @showPage "/api/vitaes/#{id}",
-      Handlebars.templates.vitae
-    
+      HandlebarsTemplates['vitae']
+
   showPage: (url, tmplFunc) ->
     $.ajax url,
       type: 'GET'
       data: 'json'
       success: (data) ->
+        console.log data
+        console.log tmplFunc(data)
         $('#page-content').html(tmplFunc(data))
       error: (x,y,z) ->
         console.log x,y,z
 
 $ ->
+  new Civet()
   console.log "routing", Backbone.history.start pushState: true, hashChange: false

@@ -13,6 +13,7 @@ gem 'puma'
 gem 'rabl'
 gem 'oj'
 gem 'gon'
+gem 'handlebars_assets'
 
 group :development, :test do
   gem 'rspec-rails'

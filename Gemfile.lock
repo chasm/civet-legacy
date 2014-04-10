@@ -59,6 +59,11 @@ GEM
     gon (4.1.1)
       actionpack (>= 2.3.0)
       json
+    handlebars_assets (0.15)
+      execjs (>= 1.2.9)
+      multi_json
+      sprockets (>= 2.0.3)
+      tilt
     hike (1.2.3)
     i18n (0.6.5)
     jquery-rails (3.0.4)
@@ -152,6 +157,7 @@ DEPENDENCIES
   fabrication
   ffaker
   gon
+  handlebars_assets
   jquery-rails
   launchy
   oj

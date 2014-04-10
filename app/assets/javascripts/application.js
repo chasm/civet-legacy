@@ -10,3 +10,4 @@
 //= require layouts/bottomRight
 //= require underscore
 //= require backbone
+//= require handlebars.runtime

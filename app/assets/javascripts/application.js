@@ -1,7 +1,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require handlebars
+//= require handlebars.runtime
 //= require moment
 //= require numeral
 //= require jquery.noty
@@ -10,4 +10,3 @@
 //= require layouts/bottomRight
 //= require underscore
 //= require backbone
-//= require handlebars.runtime
